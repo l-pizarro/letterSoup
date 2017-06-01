@@ -14,14 +14,8 @@ class Start{
 
 
     LetterSoup soup = new LetterSoup(FileManager.getMatrix(soupFile),FileManager.getMatrix(soupFile2));
-
     soup.searchCV();
-
-    String[] words = soup.getWords();
-    for(String word:words){
-      System.out.println(word);
-    }
     // WRITE THE SOLUTION FILE
-    //FileManager.writeFile(soup.getResults());
+    FileManager.writeFile(soup.generateResults());
   }
 }

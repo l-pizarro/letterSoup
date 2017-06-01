@@ -16,6 +16,15 @@ class LetterSoup{
     return words.toArray(new String[words.size()]);
   }
 
+  public String[] generateResults(){
+    ArrayList<String> results = new ArrayList<String>();
+    results.add("Palabras en ambas sopas:\n");
+    for(String word:words){
+      results.add(word);
+    }
+    return results.toArray(new String[results.size()]);
+  }
+
   public boolean searchWord(String word){
     ArrayList<int[]> openPos =  new ArrayList<int[]>();
     ArrayList<int[]> closePos =  new ArrayList<int[]>();
@@ -116,14 +125,9 @@ class LetterSoup{
           int ascii1 = (int) soup[i][j];
           int[] current = {i,j,1,ascii1,0,0,0,1}; // INITIAL STATE
           openStates.add(current);
-          System.out.println("Estado inicial: "+i+","+j+","+ascii1+","+current[4]+","+current[5]+","+current[6]+","+current[7]);
-          if(openStates.size() == 1){
-            System.out.println("El largo de EA es 1");
-          }
 
           // SEARCH A WORD IN BOTH SOUPS
           deepSearchCV(openStates.get(openStates.size()-1),openStates,closedStates);
-          System.out.println("Se limpian los estados");
           openStates.clear();
           closedStates.clear();
         }
@@ -135,8 +139,6 @@ class LetterSoup{
     int i = current[0];
     int j = current[1];
     int lenght = current[2];
-
-    System.out.println("La palabra que usa es: " + Character.toString((char)current[3])+Character.toString((char)current[4])+Character.toString((char)current[5])+Character.toString((char)current[6]));
 
     if(lenght == 4){
       String word = Character.toString((char)current[3])+Character.toString((char)current[4])+Character.toString((char)current[5])+Character.toString((char)current[6]);
@@ -150,8 +152,6 @@ class LetterSoup{
     closedStates.add(current);
     // REMOVE THE CURRENT POS FROM OPEN
     openStates.remove(openStates.size()-1);
-
-    System.out.println("Se cierra el estados actual -> El largo de los abiertos es:" + openStates.size());
 
     // TRANSITIONS -------------------------------------------------------------
     //
